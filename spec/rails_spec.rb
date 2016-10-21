@@ -18,7 +18,7 @@ describe CssController, type: :controller do
     test_file 'sass'
     expect(response).to be_success
     clear_css = response.body.gsub("\n", " ").squeeze(" ").strip
-    expect(clear_css).to eq "a { -webkit-mask: none; mask: none }"
+    expect(clear_css).to eq "a { mask: none } // yay"
   end
 
   if Sprockets::Context.instance_methods.include?(:evaluate)
@@ -38,13 +38,5 @@ describe CssController, type: :controller do
       source_map = JSON.parse(response.body)
       expect(source_map["sources"].first).to match(/loaded.*.sass/)
     end
-  end
-end
-
-describe 'Rake task' do
-  it "shows debug" do
-    info = `cd spec/app; bundle exec rake autoprefixer:info`
-    expect(info).to match(/Browsers:\n  Chrome: 25\n\n/)
-    expect(info).to match(/  transition: webkit/)
   end
 end

@@ -1,4 +1,4 @@
-module AutoprefixerRails
+module CssMedia
   # Container of prefixed CSS and source map with changes
   class Result
     # Prefixed CSS after Autoprefixer
@@ -10,7 +10,7 @@ module AutoprefixerRails
     # Warnings from Autoprefixer
     attr_reader :warnings
 
-    def initialize(css, map, warnings)
+    def initialize(css, map = [], warnings = [])
       @warnings = warnings
       @css      = css
       @map      = map

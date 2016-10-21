@@ -1,7 +1,7 @@
 require 'pathname'
 
-module AutoprefixerRails
-  # Register autoprefixer postprocessor in Sprockets and fix common issues
+module CssMedia
+  # Register cssmedia postprocessor in Sprockets and fix common issues
   class Sprockets
     def self.register_processor(processor)
       @processor = processor
@@ -20,7 +20,7 @@ module AutoprefixerRails
       result = @processor.process(css, from: filename, to: output)
 
       result.warnings.each do |warning|
-        $stderr.puts "autoprefixer: #{ warning }"
+        $stderr.puts "css_media: #{ warning }"
       end
 
       result.css
@@ -30,10 +30,10 @@ module AutoprefixerRails
     def self.install(env)
       if ::Sprockets::VERSION.to_f < 4
         env.register_postprocessor('text/css',
-          ::AutoprefixerRails::Sprockets)
+          ::CssMedia::Sprockets)
       else
         env.register_bundle_processor('text/css',
-          ::AutoprefixerRails::Sprockets)
+          ::CssMedia::Sprockets)
       end
     end
 
@@ -41,10 +41,10 @@ module AutoprefixerRails
     def self.uninstall(env)
       if ::Sprockets::VERSION.to_f < 4
         env.unregister_postprocessor('text/css',
-          ::AutoprefixerRails::Sprockets)
+          ::CssMedia::Sprockets)
       else
         env.unregister_bundle_processor('text/css',
-          ::AutoprefixerRails::Sprockets)
+          ::CssMedia::Sprockets)
       end
     end
 
