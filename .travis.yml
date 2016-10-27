@@ -1,7 +1,7 @@
 sudo: false
 language: ruby
 rvm:
-  - "2.0.0"
+  - "2.1.0"
   - "2.3.0"
 cache: bundler
 gemfile:
@@ -10,7 +10,7 @@ gemfile:
   - sprockets4.gemfile
 matrix:
   exclude:
-    - rvm: "2.1.8"
+    - rvm: "2.1.0"
       gemfile: sprockets4.gemfile
-    - rvm: "2.1.8"
+    - rvm: "2.1.0"
       gemfile: sprockets3.gemfile

@@ -1,4 +1,3 @@
-require 'pry-byebug'
 require_relative 'spec_helper'
 
 def expect_css_to_be like
