@@ -13,7 +13,7 @@ describe CssMedia do
   it "process CSS correctly" do
     css = "a {\n    tab-size: 2\n}"
     result = CssMedia.process(css, browsers: ['opera 12'])
-    expect(result.css).to eq "#{css}\n// yay\n"
+    expect(result.css).to eq css
   end
 
   context 'Sprockets' do
@@ -27,7 +27,7 @@ describe CssMedia do
       css = @assets['test.css'].to_s
       expect(css).to eq "a.test {\n" +
                         "    mask: none\n" +
-                        "}\n\n// yay\n"
+                        "}\n"
     end
 
     it "supports disabling" do
