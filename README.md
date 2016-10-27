@@ -1,6 +1,6 @@
 # CssMedia
 
-[![Gem Version](https://badge.fury.io/rb/css-media.svg)](https://badge.fury.io/rb/inky-rb) [![Build Status](https://travis-ci.org/zurb/ss-media.svg?branch=master)](https://travis-ci.org/zurb/inky-rb)
+[![Gem Version](https://badge.fury.io/rb/css_media.svg)](https://badge.fury.io/rb/css_media) [![Build Status](https://travis-ci.org/marcandre/css_media.svg?branch=master)](https://travis-ci.org/marcandre/css_media)
 
 A small rails extension to segregate `@media` CSS rules.
 
