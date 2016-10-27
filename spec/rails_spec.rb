@@ -8,9 +8,9 @@ describe CssController, type: :controller do
 
   def test_file(file)
     if Rails.version.split('.').first.to_i >= 5
-      get :test, params: { file: 'sass' }
+      get :test, params: { file: file }
     else
-      get :test, file: 'sass'
+      get :test, file: file
     end
   end
 
@@ -18,25 +18,13 @@ describe CssController, type: :controller do
     test_file 'sass'
     expect(response).to be_success
     clear_css = response.body.gsub("\n", " ").squeeze(" ").strip
-    expect(clear_css).to eq "a { mask: none } // yay"
+    expect(clear_css).to eq "a.loaded { mask: none } // yay"
   end
 
-  if Sprockets::Context.instance_methods.include?(:evaluate)
-    it 'supports evaluate' do
-      test_file 'evaluate'
-      expect(response).to be_success
-      clear_css = response.body.gsub("\n", ' ').squeeze(' ').strip
-      expect(clear_css).to eq 'a { -webkit-mask: none; mask: none }'
-    end
-  end
-
-  if sprockets_4?
-    it "works with sprockets 4 source maps" do
-      get :test, params: { exact_file: 'sass.css.map' }
-      expect(response).to be_success
-
-      source_map = JSON.parse(response.body)
-      expect(source_map["sources"].first).to match(/loaded.*.sass/)
-    end
+  it "integrates with Rails and plain CSS" do
+    test_file 'test'
+    expect(response).to be_success
+    clear_css = response.body.gsub("\n", " ").squeeze(" ").strip
+    expect(clear_css).to eq "a.test { mask: none } // yay"
   end
 end

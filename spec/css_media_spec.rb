@@ -25,7 +25,7 @@ describe CssMedia do
 
     it "integrates with Sprockets" do
       css = @assets['test.css'].to_s
-      expect(css).to eq "a {\n" +
+      expect(css).to eq "a.test {\n" +
                         "    mask: none\n" +
                         "}\n\n// yay\n"
     end
@@ -33,7 +33,7 @@ describe CssMedia do
     it "supports disabling" do
       CssMedia.uninstall(@assets)
       css = @assets['test.css'].to_s
-      expect(css).to eq "a {\n" +
+      expect(css).to eq "a.test {\n" +
                         "    mask: none\n" +
                         "}\n"
     end
