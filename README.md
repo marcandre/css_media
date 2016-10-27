@@ -1,8 +1,10 @@
 # CssMedia
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/css_media`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Gem Version](https://badge.fury.io/rb/css-media.svg)](https://badge.fury.io/rb/inky-rb) [![Build Status](https://travis-ci.org/zurb/ss-media.svg?branch=master)](https://travis-ci.org/zurb/inky-rb)
 
-TODO: Delete this and the text above, and describe your gem
+A small rails extension to segregate `@media` CSS rules.
+
+This can be helpful when sending emails, as non media rules should be inlined (with [`premailer-rails`](https://github.com/fphilipe/premailer-rails) or [`roadie`](https://github.com/Mange/roadie)) but media rules should be included with a `<style>` tag.
 
 ## Installation
 
@@ -16,24 +18,15 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install css_media
-
 ## Usage
 
-TODO: Write usage instructions here
+If your filename contains `media-only`, then only the `@media` css rules will be kept. If the filename matches `non-media` or `no-media`, then all rules will be kept except the `@media` rules. Other assets will be kept intact
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Much of the boilerplate code copied from [`autoprefixer-rails`](https://github.com/ai/autoprefixer-rails), thanks!
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/css_media.
-
+To run the tests: `rspec`. You'll need to initial run `bundle` of course.
 
 ## License
 
