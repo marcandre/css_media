@@ -1,16 +1,19 @@
 sudo: false
 language: ruby
 rvm:
-  - "2.1.0"
+  - "2.0.0"
   - "2.3.0"
-cache: bundler
+before_install:
+  - gem install bundler
 gemfile:
   - sprockets2.gemfile
   - sprockets3.gemfile
   - sprockets4.gemfile
 matrix:
   exclude:
-    - rvm: "2.1.0"
+    - rvm: "2.0.0"
       gemfile: sprockets4.gemfile
-    - rvm: "2.1.0"
+    - rvm: "2.0.0"
       gemfile: sprockets3.gemfile
+  allow_failures:
+    - gemfile: sprockets4.gemfile
