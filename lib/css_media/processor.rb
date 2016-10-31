@@ -14,9 +14,10 @@ module CssMedia
     # * `to` with output CSS file name.
     # * `map` with true to generate new source map or with previous map.
     def process(css, opts = { })
-      fn = opts.fetch(:from, '').downcase.gsub('-', '_')
-      if fn =~ /[^a-z](media_only|non?_media)[^a-z]/
-        css = send($1, css)
+      fn = opts.fetch(:from, '').downcase
+      if fn =~ /[^a-z](media[_-]only|non?[_-]media)[^a-z]/ ||
+        css =~ %r{/[/*]\s*css[_-]media:?\s*(media[_-]only|non?[_-]media)[^a-z]}i
+        css = send($1.gsub('-', '_'), css)
       end
       Result.new(css)
     end
@@ -28,9 +29,13 @@ module CssMedia
       rule[:node] == :at_rule && !!(rule[:name] =~ /media/i)
     end
 
+    def is_comment?(rule)
+      rule[:node] == :comment || rule[:node] == :whitespace
+    end
+
     def filter_media(css, want_media)
       tree = Crass.parse(css, :preserve_comments => true)
-      want = tree.select{|rule| is_media?(rule) == want_media}
+      want = tree.select{|rule| is_comment?(rule) || is_media?(rule) == want_media}
       Crass::Parser.stringify(want)
     end
 

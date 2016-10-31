@@ -39,4 +39,9 @@ describe CssController, type: :controller do
     test_file 'test'
     expect_css_to_be "a.test { mask: none }"
   end
+
+  it "returns only desired rules if comments include 'css_media: no-media'" do
+    test_file 'test_with_comment'
+    expect_css_to_be "/* css_media: media-only */ @media (min-width: 550px) { a.with_media { display: none } }"
+  end
 end
