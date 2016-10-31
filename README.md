@@ -20,7 +20,13 @@ And then execute:
 
 ## Usage
 
+### Using Filename
+
 If your filename contains `media-only`, then only the `@media` css rules will be kept. If the filename matches `non-media` or `no-media`, then all rules will be kept except the `@media` rules. Other assets will be kept intact
+
+### Using Comment
+
+If your CSS contains a comment of the form `/* css_media: media-only */`, then only the `@media` css rules will be kept. A value of `non-media` or `no-media` will instead keep all rules except the `@media` ones.
 
 ## Development
 
